@@ -7,7 +7,10 @@ return {
     { "<F11>", require("dap").step_into },
     { "<F12>", require("dap").step_out },
   },
-  opts = {
-    require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } }),
-  },
+  opts = function(_, _)
+    require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } })
+    require("dap.ext.vscode").type_to_filetypes = {
+      rt_lldb = { "rust" },
+    }
+  end,
 }
