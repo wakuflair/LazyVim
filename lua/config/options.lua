@@ -3,3 +3,9 @@
 -- Add any additional options here
 
 vim.opt.conceallevel = 0
+vim.opt.title = true
+vim.opt.titlelen = 0
+
+if vim.g.neovide then
+  vim.o.guifont = "FiraCode Nerd Font:h12"
+end
