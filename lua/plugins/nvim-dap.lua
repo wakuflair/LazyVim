@@ -1,16 +1,40 @@
 return {
   "mfussenegger/nvim-dap",
   keys = {
-    { "<F5>", require("dap").continue },
-    { "<F9>", require("dap").toggle_breakpoint },
-    { "<F10>", require("dap").step_over },
-    { "<F11>", require("dap").step_into },
-    { "<F12>", require("dap").step_out },
+    {
+      "<F5>",
+      function()
+        local dap = require("dap")
+        if dap.session() == nil then
+          vim.cmd.RustLsp({ "debuggables", bang = true })
+        else
+          dap.continue()
+        end
+      end,
+    },
+    {
+      "<F9>",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+    },
+    {
+      "<F10>",
+      function()
+        require("dap").step_over()
+      end,
+    },
+    {
+      "<F11>",
+      function()
+        require("dap").step_into()
+      end,
+    },
+    {
+      "<F12>",
+      function()
+        require("dap").step_out()
+      end,
+    },
   },
-  opts = function(_, _)
-    require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } })
-    require("dap.ext.vscode").type_to_filetypes = {
-      rt_lldb = { "rust" },
-    }
-  end,
 }
