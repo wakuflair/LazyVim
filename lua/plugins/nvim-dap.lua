@@ -2,6 +2,12 @@ return {
   "mfussenegger/nvim-dap",
   keys = {
     {
+      "<C-F5>",
+      function()
+        vim.cmd.RustLsp({ "run" })
+      end,
+    },
+    {
       "<F5>",
       function()
         local dap = require("dap")
